@@ -13,7 +13,7 @@ import java.util.List;
 public interface FriendListView extends MvpView {
     void startLoading();
 
-    void endLoading();
+    void hideLoading();
 
     void showError(@IntegerRes Integer textResource);
 
