@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.th.forge.vkfriendlist.R;
 import com.th.forge.vkfriendlist.models.Friend;
+import com.th.forge.vkfriendlist.models.VKFriendsRequest;
 import com.th.forge.vkfriendlist.ui.views.FriendListView;
+import com.vk.api.sdk.VK;
 
 import java.util.List;
 
@@ -17,7 +19,9 @@ public class FriendListFragment extends MvpAppCompatFragment implements FriendLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_friend_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_friend_list, container, false);
+        VK.execute(VKFriendsRequest(),);
+        return rootView;
     }
 
     @Override
