@@ -1,10 +1,8 @@
 package com.th.forge.vkfriendlist.repository;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.th.forge.vkfriendlist.R;
 import com.th.forge.vkfriendlist.models.Friend;
 import com.th.forge.vkfriendlist.presenters.FriendListPresenter;
 import com.vk.sdk.api.VKApi;
@@ -26,7 +24,7 @@ public class FriendsRepository {
     }
 
     public void loadFriends() {
-        VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.COUNT, 5,
+        VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.COUNT, 100,
                 VKApiConst.FIELDS, "city, country, photo_100, online"));
         request.executeWithListener(new VKRequest.VKRequestListener() {
             @Override
@@ -41,12 +39,12 @@ public class FriendsRepository {
                     JsonObject jsonObject = parsedArray.get(i).getAsJsonObject();
                     Friend friend = new Friend();
                     if (jsonObject.get("city") != null) {
-                        friend.setCity(jsonObject.get("city").getAsString());
+                        friend.setCity(jsonObject.get("city").getAsJsonObject().get("title").getAsString());
                     }
                     friend.setName(jsonObject.get("first_name").getAsString());
                     friend.setSurname(jsonObject.get("last_name").getAsString());
                     friend.setAvatar(jsonObject.get("photo_100").getAsString());
-                    friend.setOnline(jsonObject.get("online").getAsBoolean());
+                    friend.setOnline(jsonObject.get("online").getAsInt() == 1);
                     friendList.add(friend);
                 }
                 friendListPresenter.friendsLoaded(friendList);

@@ -15,13 +15,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Fragment fragment = new LoginFragment();
+        addFragment(new LoginFragment());
+//        String[] fingerprints = VKUtils.getCertificateFingerprint(this, this.getPackageName());
+//        Log.d(TAG, "fingerprints = " + fingerprints[0]);
+
+    }
+
+    public void addFragment(Fragment fragment){
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
-//        String[] fingerprints = VKUtils.getCertificateFingerprint(this, this.getPackageName());
-//        Log.d(TAG, "fingerprints = " + fingerprints[0]);
-
     }
 }
