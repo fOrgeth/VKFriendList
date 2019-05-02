@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.th.forge.vkfriendlist.R;
 import com.th.forge.vkfriendlist.ui.views.LoginView;
-import com.vk.api.sdk.VK;
 
 
 public class LoginFragment extends MvpAppCompatFragment implements LoginView {
@@ -16,7 +15,6 @@ public class LoginFragment extends MvpAppCompatFragment implements LoginView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        VK.login(getActivity());
     }
 
     @Override

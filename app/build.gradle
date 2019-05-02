@@ -28,7 +28,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-media-compat'
     }
 
-    implementation 'com.vk:androidsdk:2.1.0'
+    implementation 'com.vk:androidsdk:1.6.9'
 
     implementation 'com.google.code.gson:gson:2.8.5'
 

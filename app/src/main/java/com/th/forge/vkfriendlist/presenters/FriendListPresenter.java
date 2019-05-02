@@ -16,10 +16,19 @@ public class FriendListPresenter extends MvpPresenter<FriendListView> {
     }
 
     public void friendsLoaded(List<Friend> friendList) {
+        getViewState().hideLoading();
+        if (friendList.size() == 0) {
 
+        } else {
+            getViewState().setupFriendsList(friendList);
+        }
     }
 
     public void showError(@IntegerRes Integer textResource) {
+
+    }
+
+    public void showError(String error) {
 
     }
 }

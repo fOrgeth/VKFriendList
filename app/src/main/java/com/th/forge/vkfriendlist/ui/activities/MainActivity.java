@@ -4,12 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.th.forge.vkfriendlist.R;
 import com.th.forge.vkfriendlist.ui.fragments.LoginFragment;
-import com.vk.api.sdk.VK;
-import com.vk.api.sdk.utils.VKUtils;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();

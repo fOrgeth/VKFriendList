@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.th.forge.vkfriendlist.R;
@@ -37,7 +38,7 @@ public class FriendListFragment extends MvpAppCompatFragment implements FriendLi
 
     @Override
     public void setupFriendsList(List<Friend> friendList) {
-
+        Toast.makeText(getActivity(), friendList.get(0).getCity(), Toast.LENGTH_LONG).show();
     }
 
 }
