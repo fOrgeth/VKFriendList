@@ -5,7 +5,7 @@ import android.support.annotation.IntegerRes;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.th.forge.vkfriendlist.models.Friend;
+import com.th.forge.vkfriendlist.data.models.Friend;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package com.th.forge.vkfriendlist.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.Button;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.th.forge.vkfriendlist.R;
-import com.th.forge.vkfriendlist.presenters.LoginPresenter;
+import com.th.forge.vkfriendlist.ui.presenters.LoginPresenter;
 import com.th.forge.vkfriendlist.ui.activities.MainActivity;
 import com.th.forge.vkfriendlist.ui.views.LoginView;
 import com.vk.sdk.VKScope;

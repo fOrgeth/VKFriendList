@@ -1,4 +1,4 @@
-package com.th.forge.vkfriendlist.presenters;
+package com.th.forge.vkfriendlist.ui.presenters;
 
 import android.content.Intent;
 

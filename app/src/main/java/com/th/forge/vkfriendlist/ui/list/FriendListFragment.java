@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.th.forge.vkfriendlist.R;
-import com.th.forge.vkfriendlist.models.Friend;
-import com.th.forge.vkfriendlist.presenters.FriendListPresenter;
+import com.th.forge.vkfriendlist.data.models.Friend;
+import com.th.forge.vkfriendlist.ui.presenters.FriendListPresenter;
 import com.th.forge.vkfriendlist.ui.adapters.FriendListAdapter;
 import com.th.forge.vkfriendlist.ui.views.FriendListView;
 

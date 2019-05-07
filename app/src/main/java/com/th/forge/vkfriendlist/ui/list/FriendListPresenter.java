@@ -1,10 +1,10 @@
-package com.th.forge.vkfriendlist.presenters;
+package com.th.forge.vkfriendlist.ui.presenters;
 
 import android.support.annotation.IntegerRes;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.th.forge.vkfriendlist.models.Friend;
+import com.th.forge.vkfriendlist.data.models.Friend;
 import com.th.forge.vkfriendlist.repository.FriendsRepository;
 import com.th.forge.vkfriendlist.ui.views.FriendListView;
 
