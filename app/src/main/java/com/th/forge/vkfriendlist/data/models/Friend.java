@@ -1,4 +1,4 @@
-package com.th.forge.vkfriendlist.models;
+package com.th.forge.vkfriendlist.data.models;
 
 public class Friend {
     private String name;

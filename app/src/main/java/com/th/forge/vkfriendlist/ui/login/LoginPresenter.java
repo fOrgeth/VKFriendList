@@ -1,10 +1,9 @@
-package com.th.forge.vkfriendlist.ui.presenters;
+package com.th.forge.vkfriendlist.ui.login;
 
 import android.content.Intent;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.th.forge.vkfriendlist.ui.views.LoginView;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
@@ -28,5 +27,8 @@ public class LoginPresenter extends MvpPresenter<LoginView> {
             return false;
         }
         return true;
+    }
+
+    public void testLogin() {
     }
 }

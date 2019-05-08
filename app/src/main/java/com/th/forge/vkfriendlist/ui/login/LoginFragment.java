@@ -1,4 +1,4 @@
-package com.th.forge.vkfriendlist.ui.fragments;
+package com.th.forge.vkfriendlist.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,8 @@ import android.widget.Button;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.th.forge.vkfriendlist.R;
-import com.th.forge.vkfriendlist.ui.presenters.LoginPresenter;
-import com.th.forge.vkfriendlist.ui.activities.MainActivity;
-import com.th.forge.vkfriendlist.ui.views.LoginView;
+import com.th.forge.vkfriendlist.ui.list.FriendListFragment;
+import com.th.forge.vkfriendlist.ui.MainActivity;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.VKServiceActivity;
@@ -37,6 +36,7 @@ public class LoginFragment extends MvpAppCompatFragment implements LoginView {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         btnSignIn = rootView.findViewById(R.id.btn_login_enter);
+//        loginPresenter.testLogin();
         btnSignIn.setOnClickListener((view) -> loginVk());
         return rootView;
     }

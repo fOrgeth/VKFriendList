@@ -1,4 +1,4 @@
-package com.th.forge.vkfriendlist.ui.adapters;
+package com.th.forge.vkfriendlist.ui.list;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;

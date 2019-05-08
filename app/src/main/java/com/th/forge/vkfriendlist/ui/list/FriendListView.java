@@ -1,4 +1,4 @@
-package com.th.forge.vkfriendlist.ui.views;
+package com.th.forge.vkfriendlist.ui.list;
 
 import android.support.annotation.IntegerRes;
 
