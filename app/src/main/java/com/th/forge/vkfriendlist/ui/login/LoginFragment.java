@@ -2,21 +2,24 @@ package com.th.forge.vkfriendlist.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.th.forge.vkfriendlist.R;
-import com.th.forge.vkfriendlist.ui.list.FriendListFragment;
-import com.th.forge.vkfriendlist.ui.MainActivity;
+import com.th.forge.vkfriendlist.ui.FragmentNavigationListener;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.VKServiceActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class LoginFragment extends MvpAppCompatFragment implements LoginView {
@@ -24,7 +27,15 @@ public class LoginFragment extends MvpAppCompatFragment implements LoginView {
     @InjectPresenter
     public LoginPresenter loginPresenter;
     private Button btnSignIn;
+    private TextView textSignIn;
+    private TextView textError;
+    private CircularProgressView circularProgressView;
+    private FragmentNavigationListener callback;
+    private String[] scopes = {VKScope.FRIENDS};
 
+    public void setFragmentNavigatorListener(FragmentNavigationListener callback) {
+        this.callback = callback;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,49 +43,54 @@ public class LoginFragment extends MvpAppCompatFragment implements LoginView {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         btnSignIn = rootView.findViewById(R.id.btn_login_enter);
-//        loginPresenter.testLogin();
-        btnSignIn.setOnClickListener((view) -> loginVk());
+        textSignIn = rootView.findViewById(R.id.txt_login_hello);
+        textError = rootView.findViewById(R.id.txt_login_error);
+        circularProgressView = rootView.findViewById(R.id.cpv_login);
+        loginPresenter.onStart();
         return rootView;
     }
 
-    private void loginVk() {
+    public void loginVk() {
         Intent intent = new Intent(getActivity(), VKServiceActivity.class);
         intent.putExtra("arg1", "Authorization");
-        ArrayList<String> scopes = new ArrayList<>();
-        scopes.add(VKScope.FRIENDS);
-        intent.putStringArrayListExtra("arg2",scopes);
-        intent.putExtra("arg4",VKSdk.isCustomInitialize());
-        startActivityForResult(intent,VKServiceActivity.VKServiceType.Authorization.getOuterCode());
+        ArrayList<String> scope = new ArrayList<>(Arrays.asList(scopes));
+        intent.putStringArrayListExtra("arg2", scope);
+        intent.putExtra("arg4", VKSdk.isCustomInitialize());
+        startActivityForResult(intent, VKServiceActivity.VKServiceType.Authorization.getOuterCode());
+    }
+
+    @Override
+    public void showSignInButton() {
+        btnSignIn.setVisibility(View.VISIBLE);
+        textSignIn.setVisibility(View.VISIBLE);
+        btnSignIn.setOnClickListener((view) -> loginPresenter.onSignInClick());
     }
 
     @Override
     public void startLoading() {
-
+        btnSignIn.setVisibility(View.GONE);
+        textSignIn.setVisibility(View.GONE);
+        circularProgressView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void endLoading() {
-
+        circularProgressView.setVisibility(View.GONE);
     }
 
     @Override
     public void showError(int textResource) {
-
-    }
-
-    @Override
-    public void showError(String error) {
-
+        textError.setVisibility(View.VISIBLE);
+        textError.setText(textResource);
     }
 
     @Override
     public void showFriends() {
-        MainActivity host = (MainActivity) getActivity();
-        host.addFragment(new FriendListFragment());
+        callback.showFriendList();
     }
 
     @Override

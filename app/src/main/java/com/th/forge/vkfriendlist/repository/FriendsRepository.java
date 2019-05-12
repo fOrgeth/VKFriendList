@@ -3,6 +3,7 @@ package com.th.forge.vkfriendlist.repository;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.th.forge.vkfriendlist.R;
 import com.th.forge.vkfriendlist.data.models.Friend;
 import com.th.forge.vkfriendlist.ui.list.FriendListPresenter;
 import com.vk.sdk.api.VKApi;
@@ -53,7 +54,7 @@ public class FriendsRepository {
             @Override
             public void onError(VKError error) {
                 super.onError(error);
-                friendListPresenter.showError("Load error");
+                friendListPresenter.showError(R.string.friends_loading_error);
             }
         });
     }

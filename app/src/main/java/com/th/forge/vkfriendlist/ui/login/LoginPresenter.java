@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.th.forge.vkfriendlist.R;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
@@ -16,12 +17,14 @@ public class LoginPresenter extends MvpPresenter<LoginView> {
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
+                getViewState().endLoading();
                 getViewState().showFriends();
             }
 
             @Override
             public void onError(VKError error) {
-                getViewState().showError("VK login error");
+                getViewState().endLoading();
+                getViewState().showError(R.string.txt_login_error);
             }
         })) {
             return false;
@@ -29,6 +32,16 @@ public class LoginPresenter extends MvpPresenter<LoginView> {
         return true;
     }
 
-    public void testLogin() {
+    public void onStart() {
+        if (VKSdk.isLoggedIn()) {
+            getViewState().showFriends();
+        } else {
+            getViewState().showSignInButton();
+        }
+    }
+
+    public void onSignInClick() {
+        getViewState().startLoading();
+        getViewState().loginVk();
     }
 }

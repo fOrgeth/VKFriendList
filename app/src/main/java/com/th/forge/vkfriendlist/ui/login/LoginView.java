@@ -12,9 +12,11 @@ public interface LoginView extends MvpView {
 
     void endLoading();
 
-    void showError(@IntegerRes int textResource);
+    void loginVk();
 
-    void showError(String error);
+    void showSignInButton();
+
+    void showError(int textResource);
 
     void showFriends();
 }

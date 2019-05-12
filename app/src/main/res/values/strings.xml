@@ -6,5 +6,7 @@
     <string name="login_hello">Welcome to \"VK Friends\"\nPress \"Sign in\" to see friend list</string>
     <string name="login_btn">Sign In</string>
     <string name="friend_error_loading">Friend list load error</string>
+    <string name="txt_login_error">VK login error</string>
+    <string name="friends_loading_error">Loading error\nCheck internet connection</string>
     <integer name="com_vk_sdk_AppId">6965617</integer>
 </resources>

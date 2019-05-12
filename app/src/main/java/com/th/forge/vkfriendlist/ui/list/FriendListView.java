@@ -15,9 +15,7 @@ public interface FriendListView extends MvpView {
 
     void hideLoading();
 
-    void showError(@IntegerRes int textResource);
-
-    void showError(String error);
+    void showError(int textResource);
 
     void setupFriendsList(List<Friend> friendList);
 }

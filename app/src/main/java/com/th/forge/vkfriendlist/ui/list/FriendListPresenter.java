@@ -25,11 +25,8 @@ public class FriendListPresenter extends MvpPresenter<FriendListView> {
         }
     }
 
-    public void showError(@IntegerRes int textResource) {
-
+    public void showError(int textResource) {
+        getViewState().showError(textResource);
     }
 
-    public void showError(String error) {
-        getViewState().showError(error);
-    }
 }

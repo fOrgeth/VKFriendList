@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -19,6 +20,7 @@ import java.util.List;
 public class FriendListFragment extends MvpAppCompatFragment implements FriendListView {
 
     private RecyclerView rvFriends;
+    private TextView textError;
     private FriendListAdapter adapter;
 
     @InjectPresenter
@@ -29,6 +31,7 @@ public class FriendListFragment extends MvpAppCompatFragment implements FriendLi
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_friend_list, container, false);
         rvFriends = rootView.findViewById(R.id.rv_friends);
+        textError = rootView.findViewById(R.id.txt_list_error);
         friendListPresenter.loadFriends();
         adapter = new FriendListAdapter();
         rvFriends.setAdapter(adapter);
@@ -49,12 +52,8 @@ public class FriendListFragment extends MvpAppCompatFragment implements FriendLi
 
     @Override
     public void showError(int textResource) {
-
-    }
-
-    @Override
-    public void showError(String error) {
-        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+        textError.setVisibility(View.VISIBLE);
+        textError.setText(textResource);
     }
 
     @Override
