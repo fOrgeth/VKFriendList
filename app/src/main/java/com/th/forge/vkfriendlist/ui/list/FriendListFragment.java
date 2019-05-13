@@ -15,18 +15,25 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.th.forge.vkfriendlist.R;
 import com.th.forge.vkfriendlist.data.models.Friend;
+import com.th.forge.vkfriendlist.data.models.ProfileInfo;
+import com.th.forge.vkfriendlist.ui.ProfileInfoChangeListener;
 
 import java.util.List;
 
 public class FriendListFragment extends MvpAppCompatFragment implements FriendListView {
+    @InjectPresenter
+    public FriendListPresenter friendListPresenter;
 
     private RecyclerView rvFriends;
     private TextView textError;
     private CircularProgressView circularProgressView;
     private FriendListAdapter adapter;
 
-    @InjectPresenter
-    public FriendListPresenter friendListPresenter;
+    private ProfileInfoChangeListener profileInfoChangeCallback;
+
+    public void setProfileInfoChangeCallback(ProfileInfoChangeListener profileInfoChangeCallback) {
+        this.profileInfoChangeCallback = profileInfoChangeCallback;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,7 +42,7 @@ public class FriendListFragment extends MvpAppCompatFragment implements FriendLi
         rvFriends = rootView.findViewById(R.id.rv_friends);
         textError = rootView.findViewById(R.id.txt_list_error);
         circularProgressView = rootView.findViewById(R.id.cpv_list);
-        friendListPresenter.loadFriends();
+        friendListPresenter.loadData();
         adapter = new FriendListAdapter();
         rvFriends.setAdapter(adapter);
         rvFriends.setLayoutManager(new LinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false));
@@ -65,6 +72,11 @@ public class FriendListFragment extends MvpAppCompatFragment implements FriendLi
         rvFriends.setVisibility(View.VISIBLE);
         adapter.setupFriends(friendList);
 //        Toast.makeText(getActivity(), friendList.get(0).getCity(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setupProfileInfo(String firstName, String lastName) {
+        profileInfoChangeCallback.setupToolbar(firstName, lastName);
     }
 
 }

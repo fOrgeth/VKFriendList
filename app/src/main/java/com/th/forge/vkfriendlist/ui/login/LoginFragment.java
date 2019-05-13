@@ -30,11 +30,13 @@ public class LoginFragment extends MvpAppCompatFragment implements LoginView {
     private TextView textSignIn;
     private TextView textError;
     private CircularProgressView circularProgressView;
-    private FragmentNavigationListener callback;
+
     private String[] scopes = {VKScope.FRIENDS};
 
+    private FragmentNavigationListener fragmentNavigationCallback;
+
     public void setFragmentNavigatorListener(FragmentNavigationListener callback) {
-        this.callback = callback;
+        this.fragmentNavigationCallback = callback;
     }
 
     @Override
@@ -85,7 +87,7 @@ public class LoginFragment extends MvpAppCompatFragment implements LoginView {
 
     @Override
     public void showFriends() {
-        callback.showFriendList();
+        fragmentNavigationCallback.showFriendList();
     }
 
     @Override

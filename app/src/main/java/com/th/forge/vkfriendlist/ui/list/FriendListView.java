@@ -7,6 +7,7 @@ import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.th.forge.vkfriendlist.data.models.Friend;
+import com.th.forge.vkfriendlist.data.models.ProfileInfo;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface FriendListView extends MvpView {
     void showError(@StringRes int textResource);
 
     void setupFriendsList(List<Friend> friendList);
+
+    void setupProfileInfo(String firstName, String lastName);
 }

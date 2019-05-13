@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.th.forge.vkfriendlist.R;
+import com.th.forge.vkfriendlist.data.models.ProfileInfo;
 import com.th.forge.vkfriendlist.ui.list.FriendListFragment;
 import com.th.forge.vkfriendlist.ui.login.LoginFragment;
 
-public class MainActivity extends AppCompatActivity implements FragmentNavigationListener {
+public class MainActivity extends AppCompatActivity implements FragmentNavigationListener, ProfileInfoChangeListener {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigatio
         if (fragment instanceof LoginFragment) {
             LoginFragment loginFragment = (LoginFragment) fragment;
             loginFragment.setFragmentNavigatorListener(this);
+        } else if (fragment instanceof FriendListFragment) {
+            FriendListFragment friendListFragment = (FriendListFragment) fragment;
+            friendListFragment.setProfileInfoChangeCallback(this);
         }
     }
 
@@ -41,5 +45,10 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigatio
     public void showFriendList() {
         FriendListFragment friendListFragment = new FriendListFragment();
         addFragment(friendListFragment);
+    }
+
+    @Override
+    public void setupToolbar(String firstName, String lastName) {
+        getSupportActionBar().setTitle(String.format("%s %s", firstName, lastName));
     }
 }

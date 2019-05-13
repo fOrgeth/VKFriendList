@@ -1,4 +1,4 @@
-package com.th.forge.vkfriendlist.repository;
+package com.th.forge.vkfriendlist.repository.friends;
 
 import android.util.Log;
 
@@ -21,14 +21,14 @@ import java.util.List;
 public class FriendsRepository {
     private static final String TAG = FriendsRepository.class.getSimpleName();
 
-    private FriendListPresenter friendListPresenter;
+    private FriendListActionCallback callback;
 
-    public FriendsRepository(FriendListPresenter friendListPresenter) {
-        this.friendListPresenter = friendListPresenter;
+    public FriendsRepository(FriendListActionCallback callback) {
+        this.callback = callback;
     }
 
     public void loadFriends() {
-        VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.COUNT, 100,
+        VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.COUNT, 5,
                 VKApiConst.FIELDS, "city, country, photo_100, online"));
         request.executeWithListener(new VKRequest.VKRequestListener() {
             @Override
@@ -52,13 +52,13 @@ public class FriendsRepository {
                     friend.setOnline(jsonObject.get("online").getAsInt() == 1);
                     friendList.add(friend);
                 }
-                friendListPresenter.friendsLoaded(friendList);
+                callback.onFriendsLoaded(friendList);
             }
 
             @Override
             public void onError(VKError error) {
                 super.onError(error);
-                friendListPresenter.showError(R.string.friends_loading_error);
+                callback.onError(R.string.friends_loading_error);
             }
         });
     }
