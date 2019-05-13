@@ -17,6 +17,7 @@ public class ProfileInfoRepository {
     private static final String TAG = ProfileInfoRepository.class.getSimpleName();
     private ProfileInfoActionCallback callback;
 
+    //ToDo:DI
     public ProfileInfoRepository(ProfileInfoActionCallback callback) {
         this.callback = callback;
     }
@@ -28,14 +29,7 @@ public class ProfileInfoRepository {
             @Override
             public void onComplete(VKResponse response) {
                 super.onComplete(response);
-                ProfileInfo profileInfo = new ProfileInfo();
-                JsonParser jsonParser = new JsonParser();
-                JsonObject parsedJson = jsonParser.parse(response.json.toString()).getAsJsonObject();
-                Log.d(TAG, parsedJson.toString());
-                JsonObject jsonObject = parsedJson.getAsJsonObject("response");
-                profileInfo.setName(jsonObject.get("first_name").getAsString());
-                profileInfo.setLastName(jsonObject.get("last_name").getAsString());
-                callback.onProfileInfoLoaded(profileInfo);
+                callback.onProfileInfoLoaded(getParsedProfileInfo(response));
             }
 
             @Override
@@ -44,5 +38,16 @@ public class ProfileInfoRepository {
                 callback.onError(R.string.friends_loading_error);
             }
         });
+    }
+
+    private ProfileInfo getParsedProfileInfo(VKResponse response) {
+        ProfileInfo profileInfo = new ProfileInfo();
+        JsonParser jsonParser = new JsonParser();
+        JsonObject parsedJson = jsonParser.parse(response.json.toString()).getAsJsonObject();
+        Log.d(TAG, parsedJson.toString());
+        JsonObject jsonObject = parsedJson.getAsJsonObject("response");
+        profileInfo.setName(jsonObject.get("first_name").getAsString());
+        profileInfo.setLastName(jsonObject.get("last_name").getAsString());
+        return profileInfo;
     }
 }

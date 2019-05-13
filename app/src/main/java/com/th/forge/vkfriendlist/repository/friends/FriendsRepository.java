@@ -23,36 +23,19 @@ public class FriendsRepository {
 
     private FriendListActionCallback callback;
 
+    //   ToDo: DI
     public FriendsRepository(FriendListActionCallback callback) {
         this.callback = callback;
     }
 
     public void loadFriends() {
-        VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.COUNT, 5,
+        VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.COUNT, 0,
                 VKApiConst.FIELDS, "city, country, photo_100, online"));
         request.executeWithListener(new VKRequest.VKRequestListener() {
             @Override
             public void onComplete(VKResponse response) {
                 super.onComplete(response);
-
-                List<Friend> friendList = new ArrayList<>();
-                JsonParser jsonParser = new JsonParser();
-                JsonObject parsedJson = jsonParser.parse(response.json.toString()).getAsJsonObject();
-                Log.d(TAG,parsedJson.toString());
-                JsonArray parsedArray = parsedJson.get("response").getAsJsonObject().getAsJsonArray("items");
-                for (int i = 0; i < parsedArray.size(); i++) {
-                    JsonObject jsonObject = parsedArray.get(i).getAsJsonObject();
-                    Friend friend = new Friend();
-                    if (jsonObject.get("city") != null) {
-                        friend.setCity(jsonObject.get("city").getAsJsonObject().get("title").getAsString());
-                    }
-                    friend.setName(jsonObject.get("first_name").getAsString());
-                    friend.setSurname(jsonObject.get("last_name").getAsString());
-                    friend.setAvatar(jsonObject.get("photo_100").getAsString());
-                    friend.setOnline(jsonObject.get("online").getAsInt() == 1);
-                    friendList.add(friend);
-                }
-                callback.onFriendsLoaded(friendList);
+                callback.onFriendsLoaded(getParsedFriendList(response));
             }
 
             @Override
@@ -62,4 +45,26 @@ public class FriendsRepository {
             }
         });
     }
+
+    private List<Friend> getParsedFriendList(VKResponse response) {
+        List<Friend> friendList = new ArrayList<>();
+        JsonParser jsonParser = new JsonParser();
+        JsonObject parsedJson = jsonParser.parse(response.json.toString()).getAsJsonObject();
+        Log.d(TAG, parsedJson.toString());
+        JsonArray parsedArray = parsedJson.get("response").getAsJsonObject().getAsJsonArray("items");
+        for (int i = 0; i < parsedArray.size(); i++) {
+            JsonObject jsonObject = parsedArray.get(i).getAsJsonObject();
+            Friend friend = new Friend();
+            if (jsonObject.get("city") != null) {
+                friend.setCity(jsonObject.get("city").getAsJsonObject().get("title").getAsString());
+            }
+            friend.setName(jsonObject.get("first_name").getAsString());
+            friend.setSurname(jsonObject.get("last_name").getAsString());
+            friend.setAvatar(jsonObject.get("photo_100").getAsString());
+            friend.setOnline(jsonObject.get("online").getAsInt() == 1);
+            friendList.add(friend);
+        }
+        return friendList;
+    }
+
 }

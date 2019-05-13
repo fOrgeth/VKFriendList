@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.th.forge.vkfriendlist.R;
-import com.th.forge.vkfriendlist.data.models.ProfileInfo;
 import com.th.forge.vkfriendlist.ui.list.FriendListFragment;
 import com.th.forge.vkfriendlist.ui.login.LoginFragment;
 
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigatio
 
     @Override
     public void setupToolbar(String firstName, String lastName) {
-        getSupportActionBar().setTitle(String.format("%s %s", firstName, lastName));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(String.format("%s %s", firstName, lastName));
+        }
     }
 }

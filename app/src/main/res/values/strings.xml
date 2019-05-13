@@ -6,5 +6,6 @@
     <string name="friend_error_loading">Friend list load error</string>
     <string name="txt_login_error">Login error</string>
     <string name="friends_loading_error">Loading error\nCheck internet connection</string>
+    <string name="empty_friend_list_error">You have no friends</string>
     <integer name="com_vk_sdk_AppId">6965617</integer>
 </resources>

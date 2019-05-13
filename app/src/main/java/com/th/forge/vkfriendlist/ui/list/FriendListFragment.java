@@ -15,7 +15,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.th.forge.vkfriendlist.R;
 import com.th.forge.vkfriendlist.data.models.Friend;
-import com.th.forge.vkfriendlist.data.models.ProfileInfo;
 import com.th.forge.vkfriendlist.ui.ProfileInfoChangeListener;
 
 import java.util.List;
@@ -33,6 +32,11 @@ public class FriendListFragment extends MvpAppCompatFragment implements FriendLi
 
     public void setProfileInfoChangeCallback(ProfileInfoChangeListener profileInfoChangeCallback) {
         this.profileInfoChangeCallback = profileInfoChangeCallback;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -71,7 +75,6 @@ public class FriendListFragment extends MvpAppCompatFragment implements FriendLi
     public void setupFriendsList(List<Friend> friendList) {
         rvFriends.setVisibility(View.VISIBLE);
         adapter.setupFriends(friendList);
-//        Toast.makeText(getActivity(), friendList.get(0).getCity(), Toast.LENGTH_LONG).show();
     }
 
     @Override
