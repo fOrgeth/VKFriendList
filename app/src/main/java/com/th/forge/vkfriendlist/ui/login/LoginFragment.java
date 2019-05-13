@@ -38,11 +38,6 @@ public class LoginFragment extends MvpAppCompatFragment implements LoginView {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
@@ -78,7 +73,7 @@ public class LoginFragment extends MvpAppCompatFragment implements LoginView {
     }
 
     @Override
-    public void endLoading() {
+    public void hideLoading() {
         circularProgressView.setVisibility(View.GONE);
     }
 

@@ -1,6 +1,7 @@
 package com.th.forge.vkfriendlist.ui.login;
 
 import android.support.annotation.IntegerRes;
+import android.support.annotation.StringRes;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
@@ -10,13 +11,13 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 public interface LoginView extends MvpView {
     void startLoading();
 
-    void endLoading();
+    void hideLoading();
 
     void loginVk();
 
     void showSignInButton();
 
-    void showError(int textResource);
+    void showError(@StringRes int textResource);
 
     void showFriends();
 }

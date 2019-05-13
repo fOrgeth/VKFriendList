@@ -1,6 +1,7 @@
 package com.th.forge.vkfriendlist.ui.list;
 
 import android.support.annotation.IntegerRes;
+import android.support.annotation.StringRes;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -25,7 +26,8 @@ public class FriendListPresenter extends MvpPresenter<FriendListView> {
         }
     }
 
-    public void showError(int textResource) {
+    public void showError(@StringRes int textResource) {
+        getViewState().hideLoading();
         getViewState().showError(textResource);
     }
 

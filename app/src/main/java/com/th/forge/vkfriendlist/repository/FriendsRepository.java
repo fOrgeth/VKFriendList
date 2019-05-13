@@ -1,5 +1,7 @@
 package com.th.forge.vkfriendlist.repository;
 
+import android.util.Log;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendsRepository {
+    private static final String TAG = FriendsRepository.class.getSimpleName();
 
     private FriendListPresenter friendListPresenter;
 
@@ -35,6 +38,7 @@ public class FriendsRepository {
                 List<Friend> friendList = new ArrayList<>();
                 JsonParser jsonParser = new JsonParser();
                 JsonObject parsedJson = jsonParser.parse(response.json.toString()).getAsJsonObject();
+                Log.d(TAG,parsedJson.toString());
                 JsonArray parsedArray = parsedJson.get("response").getAsJsonObject().getAsJsonArray("items");
                 for (int i = 0; i < parsedArray.size(); i++) {
                     JsonObject jsonObject = parsedArray.get(i).getAsJsonObject();

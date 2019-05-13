@@ -1,6 +1,7 @@
 package com.th.forge.vkfriendlist.ui.list;
 
 import android.support.annotation.IntegerRes;
+import android.support.annotation.StringRes;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
@@ -15,7 +16,7 @@ public interface FriendListView extends MvpView {
 
     void hideLoading();
 
-    void showError(int textResource);
+    void showError(@StringRes int textResource);
 
     void setupFriendsList(List<Friend> friendList);
 }

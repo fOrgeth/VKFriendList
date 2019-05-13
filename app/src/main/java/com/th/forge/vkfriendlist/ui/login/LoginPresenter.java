@@ -17,13 +17,13 @@ public class LoginPresenter extends MvpPresenter<LoginView> {
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-                getViewState().endLoading();
+                getViewState().hideLoading();
                 getViewState().showFriends();
             }
 
             @Override
             public void onError(VKError error) {
-                getViewState().endLoading();
+                getViewState().hideLoading();
                 getViewState().showError(R.string.txt_login_error);
             }
         })) {
